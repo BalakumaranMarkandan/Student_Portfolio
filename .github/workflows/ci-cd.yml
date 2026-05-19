@@ -36,8 +36,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-m2
 
-    - name: Build Project
-      run: mvn clean install
+- name: Build Project
+  run: mvn clean install -DskipTests
 
     - name: Run Tests
       run: mvn test
