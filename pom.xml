@@ -11,7 +11,7 @@
 	<groupId>com.klef.jfsd.project</groupId>
 	<artifactId>StudentProjectAndPortfolioManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>StudentProjectAndPortfolioManagement</name>
 	<description>Student Project And Portfolio Management</description>
 	<url/>
