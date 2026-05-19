@@ -25,13 +25,22 @@ public class AdminController
 	private AdminService adminService;
 	
 	@GetMapping("adminhome")
-	public ModelAndView adminhome()
-	{
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("adminhome");
-		
-		return mv;
-	}
+public ModelAndView adminhome(HttpServletRequest request)
+{
+    ModelAndView mv = new ModelAndView();
+
+    HttpSession session = request.getSession(false);
+
+    if(session == null || session.getAttribute("admin") == null)
+    {
+        mv.setViewName("adminsessionexpiry");
+        return mv;
+    }
+
+    mv.setViewName("adminhome");
+
+    return mv;
+}
 	
 	@GetMapping("adminlogin")
 	public ModelAndView adminlogin()
@@ -51,7 +60,7 @@ public class AdminController
 		if(admin!=null)
 		{
 
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(false);
             session.setAttribute("admin", admin); 
 			mv.setViewName("redirect:adminhome");
 		}
@@ -86,7 +95,7 @@ public class AdminController
 	@GetMapping("adminlogout")
 	public ModelAndView adminlogout(HttpServletRequest request)
 	{
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 		session.removeAttribute("admin");
 		
 		ModelAndView mv= new ModelAndView();
@@ -220,7 +229,7 @@ public class AdminController
 	      
 	      String msg = adminService.StudentRegistration(stu);
 	      
-	      ModelAndView mv = new ModelAndView("regssuccess");
+	      ModelAndView mv = new ModelAndView("regsuccess");
 	      mv.addObject("message", msg);
 	    
 	      return mv;
